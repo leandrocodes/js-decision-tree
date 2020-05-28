@@ -1,11 +1,9 @@
-const decisionTree = () => {
+const DecisionTree = () => {
 	return {
-		create() {
-			return {
-				input: null,
-				questions: {},
-				questionsArray: []
-			}
-		}
+		create: movie => ({
+			movie,
+			questions: {},
+			questionsArray: []
+		})
 	}
 }

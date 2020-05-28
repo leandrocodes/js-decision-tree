@@ -1,3 +1,9 @@
-const tree = decisionTree()
+const decisionTree = DecisionTree()
 
-console.log(tree.create())
+const movie1 = decisionTree.create({
+	origin: 'br',
+	bigStar: false,
+	genre: 'comedy'
+})
+
+console.log(movie1)
