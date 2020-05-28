@@ -1,3 +1,3 @@
-let success = true
+const tree = decisionTree()
 
-console.log(success)
+console.log(tree.create())
