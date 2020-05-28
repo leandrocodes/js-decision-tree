@@ -1,1 +1,3 @@
-console.log('Hello World')
+let success = true
+
+console.log(success)
