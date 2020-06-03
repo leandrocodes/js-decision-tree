@@ -50,20 +50,23 @@ var samples = [
  * @returns
  */
 const id3 = (dataSet, target, features) => {
-	console.log('target: ', target)
-	// EXTRAI A LISTA DE VALORES IGUAIS A TARGET E DEPOIS REMOVE OS REPETIDOS
-	const targets = _.unique(dataSet.pluck(target))
-	console.log('targets: ', targets)
-	if (targets.length == 1) {
+	let sets = dataSet.map(set => {
+		return set.success
+	})
+	let filterSets = sets.filter((set, index) => {
+		return sets.indexOf(set) == index
+	})
+
+	if (filterSets.length == 1) {
 		return {
 			type: 'result',
-			val: targets[0],
-			name: targets[0],
-			alias: targets[0] + randomTag()
+			val: filterSets[0],
+			name: filterSets[0],
+			alias: filterSets[0] + randomTag()
 		}
 	}
 	if (features.length == 0) {
-		var topTarget = mostCommon(dataSet.pluck(target))
+		var topTarget = mostCommon(sets)
 		return { type: 'result', val: topTarget, name: topTarget, alias: topTarget + randomTag() }
 	}
 	var bestFeature = maxGain(dataSet, target, features)
