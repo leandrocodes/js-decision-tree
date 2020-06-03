@@ -178,6 +178,8 @@ const drawGraph = (id3Model, divId) => {
 			if (oldVal) {
 				var cleanVal = oldVal.replace(/_r[0-9]+/, '')
 				node.innerHTML = cleanVal
+				if (node.innerText.includes('true')) node.style.color = '#659B92'
+				else if (node.innerText.includes('false')) node.style.color = '#FF8961'
 			}
 		})
 	})
