@@ -74,8 +74,7 @@ var examples = [
         success: true,
     },
 ]
-// TODO: REMOVER UNDERSCORE
-examples = _(examples)
+
 var features = ['originCountry', 'bigStar', 'movieGenre']
 var samples = [
     {
@@ -151,11 +150,10 @@ const id3 = (dataSet, target, features) => {
 
     node.vals = filterSets.map(filterSet => {
         // TODO: REMOVER UNDERSCORE
-        let newDataSet = _(
-            dataSet.filter(set => {
-                if (set[bestFeature] == filterSet) return set
-            })
-        )
+        let newDataSet = dataSet.filter(set => {
+            if (set[bestFeature] == filterSet) return set
+        })
+
         let child_node = {
             name: filterSet,
             alias: filterSet + randomTag(),
@@ -167,17 +165,17 @@ const id3 = (dataSet, target, features) => {
     return node
 }
 
-var predict = function (id3Model, sample) {
-    var root = id3Model
-    while (root.type != 'result') {
-        var attr = root.name
+const predict = (id3Model, sample) => {
+    let leaf = id3Model
+    while (leaf.type != 'result') {
+        var attr = leaf.name
         var sampleVal = sample[attr]
-        var childNode = _.detect(root.vals, function (x) {
-            return x.name == sampleVal
+        let childNode = leaf.vals.find(val => {
+            return val.name == sampleVal
         })
-        root = childNode.child
+        leaf = childNode.child
     }
-    return root.val
+    return leaf.val
 }
 
 //necessary math functions
@@ -206,10 +204,9 @@ const gain = (dataSet, target, feature) => {
         (feature, index) => features.indexOf(feature) === index
     )
 
-    // var attrVals = _.unique(dataSet.pluck(feature))
     let setEntropy = entropy(dataSet.map(set => set[target]))
 
-    let setSize = dataSet.size()
+    let setSize = Object.keys(dataSet).length
 
     let entropies = attrVals.map(etp => {
         let subset = dataSet.filter(set => {
@@ -233,10 +230,21 @@ const gain = (dataSet, target, feature) => {
     return setEntropy - sumOfEntropies
 }
 
-var maxGain = (dataSet, target, features) => {
-    return _.max(features, function (e) {
-        return gain(dataSet, target, e)
+const maxGain = (dataSet, target, features) => {
+    let objFeatures = []
+
+    // TODO: ELIMINAR REDUNDANCIA
+    let maxGain = Math.max(...features.map(f => gain(dataSet, target, f)))
+
+    features.forEach(feature => {
+        objFeatures.push({
+            name: feature,
+            gain: gain(dataSet, target, feature),
+        })
     })
+
+    let maxObj = objFeatures.find(feature => feature.gain == maxGain)
+    return maxObj.name
 }
 
 const prob = (val, vals) => {
