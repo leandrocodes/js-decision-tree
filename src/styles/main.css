@@ -1,50 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,400;1,700&display=swap');
 
 body {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-	font-family: 'Jost', sans-serif;
-	background-color: #293239;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+    background-color: #0f111a;
 }
 
 body > h1,
 h2,
 h3,
 p {
-	text-align: center;
-	color: #ffd6a5;
+    text-align: center;
+    color: #ffd6a5;
 }
 body > p {
-	font-size: 22px;
+    font-size: 22px;
 }
 
 #main .google-visualization-orgchart-linebottom {
-	border-bottom: 4px solid #659b92;
+    border-bottom: 4px solid #659b92;
 }
 
 #main .google-visualization-orgchart-lineleft {
-	border-left: 4px solid #659b92;
+    border-left: 4px solid #659b92;
 }
 
 #main .google-visualization-orgchart-lineright {
-	border-right: 4px solid #659b92;
+    border-right: 4px solid #659b92;
 }
 
 #main .google-visualization-orgchart-linetop {
-	border-top: 4px solid #659b92;
+    border-top: 4px solid #659b92;
 }
 #main .google-visualization-orgchart-node {
-	background: #ffd6a5 !important;
-	padding: 1em 1.25em !important;
-	border: none;
-	font-family: 'Jost', sans-serif;
-	letter-spacing: 0.1em;
-	font-size: 1.25em;
-	color: #293239;
+    background: #ffd6a5 !important;
+    padding: 1em 1.25em !important;
+    border: none;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.1em;
+    font-size: 1.25em;
+    color: #293239;
 }
 
 table {
-	color: #659b92;
-	margin: 0 auto;
+    color: #659b92;
+    margin: 0 auto;
 }

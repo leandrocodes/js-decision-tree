@@ -328,32 +328,33 @@ var addEdges = function (node, g) {
 
 const renderSamples = (samples, el, model, target, features) => {
     let element = document.getElementById(el)
-    samples.forEach(s => {
-        var features_for_sample = features.map(function (x) {
-            return `${x}: ${s[x]}`
+    samples.forEach(sample => {
+        var features_for_sample = features.map(feature => {
+            return `${feature}: ${sample[feature]}`
         })
         element.innerHTML +=
             '<tr><td>' +
             features_for_sample.join(', </td><td>') +
             ', </td><td> success: ' +
-            s[target] +
+            sample[target] +
             ' — </td><td style="color: #ffd6a5;"> predicted: ' +
-            predict(model, s) +
+            predict(model, sample) +
             '</td></tr>'
     })
 }
 
-var renderTrainingData = function (_training, $el, target, features) {
-    _training.each(function (s) {
-        $el.append(
+var renderTrainingData = (train, el, target, features) => {
+    let element = document.getElementById(el)
+    train.forEach(item => {
+        let renderFeature = features.map(feature => {
+            return `${feature}: ${item[feature]}`
+        })
+        element.innerHTML +=
             '<tr><td>' +
-                _.map(features, function (x) {
-                    return s[x]
-                }).join('</td><td>') +
-                '</td><td>' +
-                s[target] +
-                '</td></tr>'
-        )
+            renderFeature.join(', </td><td>') +
+            ', </td><td> success: ' +
+            item[target] +
+            '</td></tr>'
     })
 }
 
@@ -373,6 +374,8 @@ var calcError = function (samples, model, target) {
 
 const trainModel = id3(examples, 'success', features)
 drawGraph(trainModel, 'canvas')
+
 renderSamples(samples, 'samples', trainModel, 'success', features)
-// renderTrainingData(examples, $('#training'), 'success', features)
+renderTrainingData(examples, 'training', 'success', features)
+
 console.log(calcError(samples, trainModel, 'success'))
