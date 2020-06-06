@@ -1,75 +1,77 @@
-let examples = [
-	{
-		movie: 'movie1',
-		originCountry: 'EUA',
-		bigStar: true,
-		movieGenre: 'cientific',
-		success: true
-	},
-	{
-		movie: 'movie2',
-		originCountry: 'EUA',
-		bigStar: false,
-		movieGenre: 'comedy',
-		success: false
-	},
-	{
-		movie: 'movie3',
-		originCountry: 'EUA',
-		bigStar: true,
-		movieGenre: 'comedy',
-		success: true
-	},
-	{
-		movie: 'movie4',
-		originCountry: 'EUR',
-		bigStar: false,
-		movieGenre: 'comedy',
-		success: true
-	},
-	{
-		movie: 'movie5',
-		originCountry: 'EUR',
-		bigStar: true,
-		movieGenre: 'cientific',
-		success: false
-	},
-	{
-		movie: 'movie6',
-		originCountry: 'EUR',
-		bigStar: true,
-		movieGenre: 'romance',
-		success: false
-	},
-	{
-		movie: 'movie7',
-		originCountry: 'BR',
-		bigStar: true,
-		movieGenre: 'comedy',
-		success: false
-	},
-	{
-		movie: 'movie8',
-		originCountry: 'BR',
-		bigStar: false,
-		movieGenre: 'cientific',
-		success: false
-	},
-	{
-		movie: 'movie9',
-		originCountry: 'EUR',
-		bigStar: true,
-		movieGenre: 'comedy',
-		success: true
-	},
-	{
-		movie: 'movie10',
-		originCountry: 'EUA',
-		bigStar: true,
-		movieGenre: 'comedy',
-		success: true
-	}
-]
+// let examples = [
+// 	{
+// 		movie: 'movie1',
+// 		originCountry: 'EUA',
+// 		bigStar: true,
+// 		movieGenre: 'cientific',
+// 		success: true
+// 	},
+// 	{
+// 		movie: 'movie2',
+// 		originCountry: 'EUA',
+// 		bigStar: false,
+// 		movieGenre: 'comedy',
+// 		success: false
+// 	},
+// 	{
+// 		movie: 'movie3',
+// 		originCountry: 'EUA',
+// 		bigStar: true,
+// 		movieGenre: 'comedy',
+// 		success: true
+// 	},
+// 	{
+// 		movie: 'movie4',
+// 		originCountry: 'EUR',
+// 		bigStar: false,
+// 		movieGenre: 'comedy',
+// 		success: true
+// 	},
+// 	{
+// 		movie: 'movie5',
+// 		originCountry: 'EUR',
+// 		bigStar: true,
+// 		movieGenre: 'cientific',
+// 		success: false
+// 	},
+// 	{
+// 		movie: 'movie6',
+// 		originCountry: 'EUR',
+// 		bigStar: true,
+// 		movieGenre: 'romance',
+// 		success: false
+// 	},
+// 	{
+// 		movie: 'movie7',
+// 		originCountry: 'BR',
+// 		bigStar: true,
+// 		movieGenre: 'comedy',
+// 		success: false
+// 	},
+// 	{
+// 		movie: 'movie8',
+// 		originCountry: 'BR',
+// 		bigStar: false,
+// 		movieGenre: 'cientific',
+// 		success: false
+// 	},
+// 	{
+// 		movie: 'movie9',
+// 		originCountry: 'EUR',
+// 		bigStar: true,
+// 		movieGenre: 'comedy',
+// 		success: true
+// 	},
+// 	{
+// 		movie: 'movie10',
+// 		originCountry: 'EUA',
+// 		bigStar: true,
+// 		movieGenre: 'comedy',
+// 		success: true
+// 	}
+// ]
+
+import movies from '../data/movies.js'
 
 let features = ['originCountry', 'bigStar', 'movieGenre']
 let samples = [
@@ -355,10 +357,10 @@ let calcError = function (samples, model, target) {
 	return correct / total > 1 ? 'error' : 'success'
 }
 
-const trainModel = id3(examples, 'success', features)
+const trainModel = id3(movies, 'success', features)
 drawGraph(trainModel, 'canvas')
 
 renderSamples(samples, 'samples', trainModel, 'success', features)
-renderTrainingData(examples, 'training', 'success', features)
+renderTrainingData(movies, 'training', 'success', features)
 
 console.log(calcError(samples, trainModel, 'success'))
