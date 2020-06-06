@@ -43,3 +43,8 @@ body > p {
 	font-size: 1.25em;
 	color: #293239;
 }
+
+table {
+	color: #659b92;
+	margin: 0 auto;
+}

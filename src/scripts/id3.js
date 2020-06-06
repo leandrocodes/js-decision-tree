@@ -326,36 +326,36 @@ var addEdges = function (node, g) {
     return g
 }
 
-// var renderSamples = function (samples, $el, model, target, features) {
-// 	_.each(samples, function (s) {
-// 		var features_for_sample = _.map(features, function (x) {
-// 			return s[x]
-// 		})
-// 		$el.append(
-// 			'<tr><td>' +
-// 				features_for_sample.join('</td><td>') +
-// 				'</td><td><b>' +
-// 				predict(model, s) +
-// 				'</b></td><td>actual: ' +
-// 				s[target] +
-// 				'</td></tr>'
-// 		)
-// 	})
-// }
+const renderSamples = (samples, el, model, target, features) => {
+    let element = document.getElementById(el)
+    samples.forEach(s => {
+        var features_for_sample = features.map(function (x) {
+            return `${x}: ${s[x]}`
+        })
+        element.innerHTML +=
+            '<tr><td>' +
+            features_for_sample.join(', </td><td>') +
+            ', </td><td> success: ' +
+            s[target] +
+            ' — </td><td style="color: #ffd6a5;"> predicted: ' +
+            predict(model, s) +
+            '</td></tr>'
+    })
+}
 
-// var renderTrainingData = function (_training, $el, target, features) {
-//     _training.each(function (s) {
-//         $el.append(
-//             '<tr><td>' +
-//                 _.map(features, function (x) {
-//                     return s[x]
-//                 }).join('</td><td>') +
-//                 '</td><td>' +
-//                 s[target] +
-//                 '</td></tr>'
-//         )
-//     })
-// }
+var renderTrainingData = function (_training, $el, target, features) {
+    _training.each(function (s) {
+        $el.append(
+            '<tr><td>' +
+                _.map(features, function (x) {
+                    return s[x]
+                }).join('</td><td>') +
+                '</td><td>' +
+                s[target] +
+                '</td></tr>'
+        )
+    })
+}
 
 var calcError = function (samples, model, target) {
     var total = 0
@@ -373,6 +373,6 @@ var calcError = function (samples, model, target) {
 
 const trainModel = id3(examples, 'success', features)
 drawGraph(trainModel, 'canvas')
-// renderSamples(samples, $('#samples'), testModel, 'success', features)
+renderSamples(samples, 'samples', trainModel, 'success', features)
 // renderTrainingData(examples, $('#training'), 'success', features)
 console.log(calcError(samples, trainModel, 'success'))
